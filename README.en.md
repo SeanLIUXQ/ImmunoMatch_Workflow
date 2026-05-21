@@ -227,7 +227,7 @@ The workflow produces:
 
 ## Benchmark Against The Improved Method
 
-The improved method does not change model weights and does not train a model. It optimizes the engineering layer only: model caching, pair-score caching, duplicate-pair collapse and threshold calibration.
+The improved method does not change model weights and does not train a model. It optimizes the engineering layer only: model caching, pair-score caching, duplicate-pair collapse and threshold calibration. All comparison metrics below come from the same benchmark test split.
 
 To compare the original baseline against the improved modular workflow, run:
 
@@ -244,7 +244,7 @@ The output will be written to `benchmark_results/` and includes:
 - `original_vs_improved_benchmark.svg`
 - `original_vs_improved_benchmark.png`
 
-The verified run shows that the improved method keeps AUC unchanged while reducing runtime from about 120.62 s to 29.91 s, giving a 4.03x speedup, and increases accuracy from 0.6458 to 0.6563.
+The verified run shows that on the same benchmark test split, the improved method keeps AUC-ROC unchanged while reducing runtime from about 135.67 s to 31.59 s, giving a 4.29x speedup, and increases accuracy from 0.6458 to 0.6563 and F1 from 0.6852 to 0.6916.
 
 Comparison figure:
 

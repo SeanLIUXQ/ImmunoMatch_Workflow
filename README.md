@@ -20,7 +20,7 @@ Highlights:
 - Baseline lightweight reproduction workflow.
 - Improved cached scorer under `immunomatch_ext/`.
 - Unified CLI via `immunomatch_cli.py`.
-- Original vs improved benchmark with verified `4.03x` speedup.
+- Original vs improved benchmark with verified `4.29x` speedup.
 
 Original paper:
 

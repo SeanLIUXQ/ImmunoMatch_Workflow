@@ -18,9 +18,9 @@ All notable changes to this lightweight ImmunoMatch workflow are documented here
 
 ### Verified Benchmark
 
-- Original runtime: `120.62 s`
-- Improved runtime: `29.91 s`
-- Speedup: `4.03x`
+- Original runtime: `135.67 s`
+- Improved runtime: `31.59 s`
+- Speedup: `4.29x`
 - Original accuracy: `0.6458`
 - Improved accuracy: `0.6563`
 - AUC-ROC unchanged: `0.6632`

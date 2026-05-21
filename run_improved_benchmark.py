@@ -68,6 +68,8 @@ Improved calibrated threshold: `{threshold:.4f}`
 - `benchmark_metrics.json`
 - `original_vs_improved_benchmark.svg`
 - `original_vs_improved_benchmark.png`
+
+Note: all metrics in this report are computed on the same benchmark test split. AUC-ROC is expected to remain unchanged because the model scores are unchanged; the improved method only changes execution and threshold selection.
 """
     path.write_text(content, encoding="utf-8")
 

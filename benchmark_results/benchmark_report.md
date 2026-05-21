@@ -10,8 +10,8 @@
 
 | Metric | Original | Improved | Delta |
 |---|---:|---:|---:|
-| Runtime seconds | 120.620 | 29.915 | 90.705 |
-| Speedup | 1.00x | 4.03x | +3.03x |
+| Runtime seconds | 135.669 | 31.593 | 104.076 |
+| Speedup | 1.00x | 4.29x | +3.29x |
 | AUC-ROC | 0.6632 | 0.6632 | 0.0000 |
 | Accuracy | 0.6458 | 0.6562 | 0.0104 |
 | F1 | 0.6852 | 0.6916 | 0.0064 |
@@ -27,3 +27,5 @@ Improved calibrated threshold: `0.5091`
 - `benchmark_metrics.json`
 - `original_vs_improved_benchmark.svg`
 - `original_vs_improved_benchmark.png`
+
+Note: all metrics in this report are computed on the same benchmark test split. AUC-ROC is expected to remain unchanged because the model scores are unchanged; the improved method only changes execution and threshold selection.

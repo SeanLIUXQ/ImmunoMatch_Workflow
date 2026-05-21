@@ -227,7 +227,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File run_lightweight_paper_wo
 
 ## 改进方法对比
 
-本仓库新增的改进方法不改变 ImmunoMatch 模型权重，也不训练模型。它只在工程层做优化：模型缓存、pair-score 缓存、重复 pair 去重和阈值校准。
+本仓库新增的改进方法不改变 ImmunoMatch 模型权重，也不训练模型。它只在工程层做优化：模型缓存、pair-score 缓存、重复 pair 去重和阈值校准。下面的对比指标全部来自同一个 benchmark test split。
 
 如果你想对比原始方法和改进方法，请运行新增的 benchmark：
 
@@ -244,7 +244,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File run_lightweight_paper_wo
 - `original_vs_improved_benchmark.svg`
 - `original_vs_improved_benchmark.png`
 
-当前已验证结果显示：改进方法在保持 AUC 不变的前提下，通过缓存和阈值校准将运行时间从约 120.62 秒降到 29.91 秒，约提升 4.03 倍，同时 accuracy 从 0.6458 提升到 0.6563。
+当前已验证结果显示：在同一 benchmark test split 上，改进方法保持 AUC-ROC 不变，通过缓存和阈值校准将运行时间从约 135.67 秒降到 31.59 秒，约提升 4.29 倍，同时 accuracy 从 0.6458 提升到 0.6563，F1 从 0.6852 提升到 0.6916。
 
 对比图：
 

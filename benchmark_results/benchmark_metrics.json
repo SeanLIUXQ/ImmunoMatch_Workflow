@@ -26,7 +26,7 @@
     "threshold": 0.5,
     "mean_positive_score": 0.6830114870875453,
     "mean_negative_score": 0.46005134126971825,
-    "runtime_sec": 120.62033099999826,
+    "runtime_sec": 135.66931339999792,
     "speedup_vs_original": 1.0
   },
   "improved": {
@@ -49,7 +49,7 @@
     "threshold": 0.5090817675030356,
     "mean_positive_score": 0.6830114870875453,
     "mean_negative_score": 0.46005134126971825,
-    "runtime_sec": 29.914893199998914,
-    "speedup_vs_original": 4.032116384089335
+    "runtime_sec": 31.593180500000017,
+    "speedup_vs_original": 4.294259433614094
   }
 }
