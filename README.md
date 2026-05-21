@@ -4,7 +4,7 @@
 
 **A lightweight, executable reproduction workflow for ImmunoMatch inference and paper-style evaluation**
 
-[中文文档](README.zh-CN.md) | [English README](README.en.md) | [Original Paper](docs/original-paper.md)
+[中文文档](README.zh-CN.md) | [English README](README.en.md) | [Original Paper](docs/original-paper.md) | [Changelog](CHANGELOG.md) | [Roadmap](ROADMAP.md)
 
 </div>
 
@@ -14,6 +14,13 @@ Please choose your preferred language:
 
 - [中文说明](README.zh-CN.md)
 - [English documentation](README.en.md)
+
+Highlights:
+
+- Baseline lightweight reproduction workflow.
+- Improved cached scorer under `immunomatch_ext/`.
+- Unified CLI via `immunomatch_cli.py`.
+- Original vs improved benchmark with verified `4.03x` speedup.
 
 Original paper:
 

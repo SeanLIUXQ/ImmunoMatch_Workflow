@@ -13,6 +13,9 @@ This folder is the cleaned GitHub upload package.
 - `download_immunomatch_assets.py`
 - `run_immunomatch_toy.py`
 - `run_lightweight_paper_workflow.py`
+- `run_improved_benchmark.py`
+- `immunomatch_cli.py`
+- `immunomatch_ext/`
 - `run_lightweight_paper_workflow_windows.ps1`
 - `run_reproduction_windows.ps1`
 - `toy_immunomatch_input.csv`
@@ -31,6 +34,11 @@ This folder is the cleaned GitHub upload package.
 - `lightweight_paper_workflow/score_distribution.png`
 - `lightweight_paper_workflow/roc_curve.svg`
 - `lightweight_paper_workflow/roc_curve.png`
+- `benchmark_results/README.md`
+- `benchmark_results/benchmark_report.md`
+- `benchmark_results/benchmark_metrics.json`
+- `benchmark_results/original_vs_improved_benchmark.svg`
+- `benchmark_results/original_vs_improved_benchmark.png`
 
 ## Do Not Upload
 

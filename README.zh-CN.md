@@ -4,12 +4,12 @@
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey)
-![Workflow](https://img.shields.io/badge/Workflow-Lightweight%20Reproduction-green)
+![Workflow](https://img.shields.io/badge/Workflow-Lightweight%20%2B%20Improved-green)
 ![Model](https://img.shields.io/badge/Model-ImmunoMatch-orange)
 
 **基于官方 ImmunoMatch 公开模型与示例数据的轻量级、可运行、可复现 workflow**
 
-[English](README.en.md) | [原论文信息](docs/original-paper.md) | [快速开始](#快速开始)
+[English](README.en.md) | [原论文信息](docs/original-paper.md) | [CHANGELOG](CHANGELOG.md) | [ROADMAP](ROADMAP.md) | [快速开始](#快速开始)
 
 </div>
 
@@ -26,6 +26,11 @@
 - 输出可编辑 SVG 图、PNG 预览图和结果表。
 
 当前 workflow 已在本地验证通过，适合作为教学、方法复现、项目模板或后续扩展的起点。
+
+当前仓库同时包含两层能力：
+
+- 原始轻量复现层：尽量贴近官方公开推理 workflow。
+- 改进工程层：通过 `immunomatch_ext/` 新增缓存、去重、阈值校准和 CLI，不改变原始 baseline 代码。
 
 ## 原论文
 
@@ -54,6 +59,17 @@ Guo, D., Dunn-Walters, D.K., Fraternali, F. et al. ImmunoMatch learns and predic
 | 评估 | AUC-ROC、accuracy、confusion matrix、外部验证等 | AUC-ROC、accuracy@0.5、confusion matrix、score distribution |
 | 图表 | 论文完整图组 | 轻量 ROC 曲线和 score distribution 图 |
 
+## 功能亮点
+
+| 功能 | 说明 |
+|---|---|
+| 轻量复现 | 从官方示例数据构造 positive/pseudo-negative 并运行公开 checkpoint |
+| 本地模型缓存 | 通过 `download_immunomatch_assets.py` 下载 kappa/lambda checkpoint 到 `models/` |
+| 改进 scorer | `immunomatch_ext` 支持模型缓存、pair-score memoization、重复 pair 去重 |
+| 指标与图 | 输出 AUC、accuracy、confusion matrix、score distribution、ROC |
+| Benchmark | 对比原始方法与改进方法的速度和准确率 |
+| CLI | 通过 `immunomatch_cli.py` 统一运行 baseline、improved 和 benchmark |
+
 ## 当前验证结果
 
 默认轻量运行使用 24 个 observed positive 和 24 个 pseudo-negative。
@@ -81,11 +97,23 @@ Confusion matrix at threshold 0.5:
 ├── README.md                              # 语言选择入口
 ├── README.zh-CN.md                        # 中文说明
 ├── README.en.md                           # English README
+├── CHANGELOG.md                           # 版本与改进记录
+├── ROADMAP.md                             # 后续开发路线
 ├── docs/
-│   └── original-paper.md                  # 原论文引用与资源说明
+│   ├── original-paper.md                  # 原论文引用与资源说明
+│   └── improvement_plan.md                # 模块化改进计划
 ├── download_immunomatch_assets.py         # 下载并缓存 ImmunoMatch checkpoint
+├── immunomatch_cli.py                     # 统一 CLI 入口
+├── immunomatch_ext/                       # 改进模块包
+│   ├── batch_engine.py
+│   ├── cache.py
+│   ├── cli.py
+│   ├── metrics.py
+│   ├── pair_builder.py
+│   └── visuals.py
 ├── run_immunomatch_toy.py                 # 最小 toy 推理脚本
 ├── run_lightweight_paper_workflow.py      # 论文级轻量 workflow 主脚本
+├── run_improved_benchmark.py              # 原始 vs 改进 benchmark
 ├── run_lightweight_paper_workflow_windows.ps1
 ├── run_reproduction_windows.ps1
 ├── toy_immunomatch_input.csv
@@ -99,6 +127,11 @@ Confusion matrix at threshold 0.5:
 │   ├── score_distribution.png
 │   ├── roc_curve.svg
 │   └── roc_curve.png
+├── benchmark_results/                     # 原始 vs 改进示例结果
+│   ├── benchmark_metrics.json
+│   ├── benchmark_report.md
+│   ├── original_vs_improved_benchmark.svg
+│   └── original_vs_improved_benchmark.png
 └── requirements_reproduced.txt
 ```
 
@@ -185,6 +218,55 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File run_lightweight_paper_wo
 - `lightweight_paper_workflow/score_distribution.png`
 - `lightweight_paper_workflow/roc_curve.svg`
 - `lightweight_paper_workflow/roc_curve.png`
+
+## 改进方法对比
+
+本仓库新增的改进方法不改变 ImmunoMatch 模型权重，也不训练模型。它只在工程层做优化：模型缓存、pair-score 缓存、重复 pair 去重和阈值校准。
+
+如果你想对比原始方法和改进方法，请运行新增的 benchmark：
+
+```powershell
+.\.venv\Scripts\python.exe run_improved_benchmark.py --model-root models --output-dir benchmark_results --n-pairs 24 --repeats 4
+```
+
+输出会写到 `benchmark_results/`，包括：
+
+- `original_scored.csv`
+- `improved_scored.csv`
+- `benchmark_metrics.json`
+- `benchmark_report.md`
+- `original_vs_improved_benchmark.svg`
+- `original_vs_improved_benchmark.png`
+
+当前已验证结果显示：改进方法在保持 AUC 不变的前提下，通过缓存和阈值校准将运行时间从约 120.62 秒降到 29.91 秒，约提升 4.03 倍，同时 accuracy 从 0.6458 提升到 0.6563。
+
+## CLI 用法
+
+你也可以通过统一 CLI 运行 baseline、improved 和 benchmark。
+
+查看帮助：
+
+```powershell
+.\.venv\Scripts\python.exe immunomatch_cli.py --help
+```
+
+运行原始 baseline scorer：
+
+```powershell
+.\.venv\Scripts\python.exe immunomatch_cli.py baseline --input lightweight_paper_workflow/lightweight_pairs.csv --output cli_outputs/baseline_scored.csv --model-root models --ltype-col locus
+```
+
+运行改进 scorer：
+
+```powershell
+.\.venv\Scripts\python.exe immunomatch_cli.py improved --input lightweight_paper_workflow/lightweight_pairs.csv --output cli_outputs/improved_scored.csv --model-root models --ltype-col locus
+```
+
+运行 benchmark：
+
+```powershell
+.\.venv\Scripts\python.exe immunomatch_cli.py benchmark --input example_input/King_Tonsil_GC_paired.csv --model-root models --output-dir benchmark_results --n-pairs 24 --repeats 4
+```
 
 ## 常见问题
 

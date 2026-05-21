@@ -27,6 +27,10 @@ external/*.zip
 
 # Runtime logs and temporary files
 tmp/
+cli_outputs/
+benchmark_results/original_scored.csv
+benchmark_results/improved_scored.csv
+benchmark_results/benchmark_pairs.csv
 *.log
 inference_log.txt
 windows_reproduction_log.txt

@@ -4,12 +4,12 @@
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey)
-![Workflow](https://img.shields.io/badge/Workflow-Lightweight%20Reproduction-green)
+![Workflow](https://img.shields.io/badge/Workflow-Lightweight%20%2B%20Improved-green)
 ![Model](https://img.shields.io/badge/Model-ImmunoMatch-orange)
 
 **A lightweight, executable reproduction workflow for ImmunoMatch inference and paper-style evaluation**
 
-[中文](README.zh-CN.md) | [Original Paper](docs/original-paper.md) | [Quick Start](#quick-start)
+[中文](README.zh-CN.md) | [Original Paper](docs/original-paper.md) | [CHANGELOG](CHANGELOG.md) | [ROADMAP](ROADMAP.md) | [Quick Start](#quick-start)
 
 </div>
 
@@ -26,6 +26,11 @@ This repository provides a lightweight reproduction workflow for the public Immu
 - Export editable SVG figures, PNG previews, and result tables.
 
 The workflow has been verified locally and is intended for method reproduction, teaching, and lightweight downstream extension.
+
+The repository now contains two layers:
+
+- Baseline lightweight reproduction: closely follows the public inference workflow.
+- Improved engineering layer: adds caching, deduplication, threshold calibration and CLI through `immunomatch_ext/` without changing the baseline scripts.
 
 ## Original Paper
 
@@ -54,6 +59,17 @@ Guo, D., Dunn-Walters, D.K., Fraternali, F. et al. ImmunoMatch learns and predic
 | Evaluation | AUC-ROC, accuracy, confusion matrix, external validation | AUC-ROC, accuracy@0.5, confusion matrix, score distribution |
 | Figures | Full manuscript figure set | Lightweight ROC and score-distribution figures |
 
+## Highlights
+
+| Feature | Description |
+|---|---|
+| Lightweight reproduction | Builds positives/pseudo-negatives from public example data and runs public checkpoints |
+| Local model download | Downloads kappa/lambda checkpoints into `models/` with `download_immunomatch_assets.py` |
+| Improved scorer | `immunomatch_ext` provides model cache, pair-score memoization and duplicate-pair collapse |
+| Metrics and figures | Exports AUC, accuracy, confusion matrix, score distribution and ROC |
+| Benchmark | Compares original and improved workflows in speed and accuracy |
+| CLI | Runs baseline, improved and benchmark commands through `immunomatch_cli.py` |
+
 ## Verified Results
 
 The default run uses 24 observed positives and 24 pseudo-negatives.
@@ -81,11 +97,23 @@ Confusion matrix at threshold 0.5:
 ├── README.md                              # Language selector
 ├── README.zh-CN.md                        # Chinese README
 ├── README.en.md                           # English README
+├── CHANGELOG.md                           # Version and improvement notes
+├── ROADMAP.md                             # Future development roadmap
 ├── docs/
-│   └── original-paper.md                  # Original paper citation and resource notes
+│   ├── original-paper.md                  # Original paper citation and resource notes
+│   └── improvement_plan.md                # Modular improvement plan
 ├── download_immunomatch_assets.py         # Download and cache ImmunoMatch checkpoints
+├── immunomatch_cli.py                     # Unified CLI entry point
+├── immunomatch_ext/                       # Improved module package
+│   ├── batch_engine.py
+│   ├── cache.py
+│   ├── cli.py
+│   ├── metrics.py
+│   ├── pair_builder.py
+│   └── visuals.py
 ├── run_immunomatch_toy.py                 # Minimal toy inference script
 ├── run_lightweight_paper_workflow.py      # Main lightweight paper workflow
+├── run_improved_benchmark.py              # Original vs improved benchmark
 ├── run_lightweight_paper_workflow_windows.ps1
 ├── run_reproduction_windows.ps1
 ├── toy_immunomatch_input.csv
@@ -99,6 +127,11 @@ Confusion matrix at threshold 0.5:
 │   ├── score_distribution.png
 │   ├── roc_curve.svg
 │   └── roc_curve.png
+├── benchmark_results/                     # Original vs improved example outputs
+│   ├── benchmark_metrics.json
+│   ├── benchmark_report.md
+│   ├── original_vs_improved_benchmark.svg
+│   └── original_vs_improved_benchmark.png
 └── requirements_reproduced.txt
 ```
 
@@ -185,6 +218,55 @@ The workflow produces:
 - `lightweight_paper_workflow/score_distribution.png`
 - `lightweight_paper_workflow/roc_curve.svg`
 - `lightweight_paper_workflow/roc_curve.png`
+
+## Benchmark Against The Improved Method
+
+The improved method does not change model weights and does not train a model. It optimizes the engineering layer only: model caching, pair-score caching, duplicate-pair collapse and threshold calibration.
+
+To compare the original baseline against the improved modular workflow, run:
+
+```powershell
+.\.venv\Scripts\python.exe run_improved_benchmark.py --model-root models --output-dir benchmark_results --n-pairs 24 --repeats 4
+```
+
+The output will be written to `benchmark_results/` and includes:
+
+- `original_scored.csv`
+- `improved_scored.csv`
+- `benchmark_metrics.json`
+- `benchmark_report.md`
+- `original_vs_improved_benchmark.svg`
+- `original_vs_improved_benchmark.png`
+
+The verified run shows that the improved method keeps AUC unchanged while reducing runtime from about 120.62 s to 29.91 s, giving a 4.03x speedup, and increases accuracy from 0.6458 to 0.6563.
+
+## CLI Usage
+
+You can also run baseline, improved and benchmark workflows through one CLI.
+
+Show help:
+
+```powershell
+.\.venv\Scripts\python.exe immunomatch_cli.py --help
+```
+
+Run the original baseline scorer:
+
+```powershell
+.\.venv\Scripts\python.exe immunomatch_cli.py baseline --input lightweight_paper_workflow/lightweight_pairs.csv --output cli_outputs/baseline_scored.csv --model-root models --ltype-col locus
+```
+
+Run the improved scorer:
+
+```powershell
+.\.venv\Scripts\python.exe immunomatch_cli.py improved --input lightweight_paper_workflow/lightweight_pairs.csv --output cli_outputs/improved_scored.csv --model-root models --ltype-col locus
+```
+
+Run the benchmark:
+
+```powershell
+.\.venv\Scripts\python.exe immunomatch_cli.py benchmark --input example_input/King_Tonsil_GC_paired.csv --model-root models --output-dir benchmark_results --n-pairs 24 --repeats 4
+```
 
 ## FAQ
 

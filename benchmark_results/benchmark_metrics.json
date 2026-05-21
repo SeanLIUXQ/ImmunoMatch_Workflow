@@ -1,0 +1,55 @@
+{
+  "benchmark_settings": {
+    "n_pairs": 24,
+    "repeats": 4,
+    "n_rows": 192,
+    "unique_pairs": 48,
+    "seed": 13
+  },
+  "original": {
+    "auc_roc": 0.6631944444444444,
+    "accuracy": 0.6458333333333334,
+    "precision": 0.6166666666666667,
+    "recall": 0.7708333333333334,
+    "f1": 0.6851851851851852,
+    "mcc": 0.3012320380383547,
+    "confusion_matrix": [
+      [
+        25,
+        23
+      ],
+      [
+        11,
+        37
+      ]
+    ],
+    "threshold": 0.5,
+    "mean_positive_score": 0.6830114870875453,
+    "mean_negative_score": 0.46005134126971825,
+    "runtime_sec": 120.62033099999826,
+    "speedup_vs_original": 1.0
+  },
+  "improved": {
+    "auc_roc": 0.6631944444444444,
+    "accuracy": 0.65625,
+    "precision": 0.6271186440677966,
+    "recall": 0.7708333333333334,
+    "f1": 0.6915887850467289,
+    "mcc": 0.3210438768545213,
+    "confusion_matrix": [
+      [
+        26,
+        22
+      ],
+      [
+        11,
+        37
+      ]
+    ],
+    "threshold": 0.5090817675030356,
+    "mean_positive_score": 0.6830114870875453,
+    "mean_negative_score": 0.46005134126971825,
+    "runtime_sec": 29.914893199998914,
+    "speedup_vs_original": 4.032116384089335
+  }
+}
