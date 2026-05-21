@@ -90,6 +90,12 @@ Confusion matrix at threshold 0.5:
  [ 4, 20]]
 ```
 
+Lightweight workflow figures:
+
+![Score distribution](lightweight_paper_workflow/score_distribution.png)
+
+![ROC curve](lightweight_paper_workflow/roc_curve.png)
+
 ## Repository Layout
 
 ```text
@@ -239,6 +245,14 @@ The output will be written to `benchmark_results/` and includes:
 - `original_vs_improved_benchmark.png`
 
 The verified run shows that the improved method keeps AUC unchanged while reducing runtime from about 120.62 s to 29.91 s, giving a 4.03x speedup, and increases accuracy from 0.6458 to 0.6563.
+
+Comparison figure:
+
+![Original vs Improved benchmark figure](benchmark_results/original_vs_improved_benchmark.png)
+
+For an editable version, open:
+
+- `benchmark_results/original_vs_improved_benchmark.svg`
 
 ## CLI Usage
 

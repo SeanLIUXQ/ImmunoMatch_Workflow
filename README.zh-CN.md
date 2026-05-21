@@ -90,6 +90,12 @@ Confusion matrix at threshold 0.5:
  [ 4, 20]]
 ```
 
+轻量 workflow 输出图：
+
+![Score distribution](lightweight_paper_workflow/score_distribution.png)
+
+![ROC curve](lightweight_paper_workflow/roc_curve.png)
+
 ## 仓库结构
 
 ```text
@@ -239,6 +245,14 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File run_lightweight_paper_wo
 - `original_vs_improved_benchmark.png`
 
 当前已验证结果显示：改进方法在保持 AUC 不变的前提下，通过缓存和阈值校准将运行时间从约 120.62 秒降到 29.91 秒，约提升 4.03 倍，同时 accuracy 从 0.6458 提升到 0.6563。
+
+对比图：
+
+![原始方法 vs 改进方法对比图](benchmark_results/original_vs_improved_benchmark.png)
+
+如果你想看可编辑版本，可以打开：
+
+- `benchmark_results/original_vs_improved_benchmark.svg`
 
 ## CLI 用法
 
