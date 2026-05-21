@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments
+.venv/
+venv/
+env/
+
+# Model/cache files
+models/
+.hf_cache/
+*.incomplete
+*.part
+
+# Vendored or local tooling caches
+.opencode/
+node_modules/
+
+# Downloaded upstream archives
+external/*.zip
+
+# Runtime logs and temporary files
+tmp/
+*.log
+inference_log.txt
+windows_reproduction_log.txt
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

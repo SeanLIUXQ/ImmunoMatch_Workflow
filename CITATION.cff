@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this lightweight workflow, please cite the original ImmunoMatch paper."
+title: "ImmunoMatch Lightweight Workflow Reproduction"
+type: software
+authors:
+  - name: "ImmunoMatch Lightweight Workflow Contributors"
+references:
+  - type: article
+    title: "ImmunoMatch learns and predicts cognate pairing of heavy and light immunoglobulin chains"
+    authors:
+      - family-names: "Guo"
+        given-names: "D."
+      - family-names: "Dunn-Walters"
+        given-names: "D. K."
+      - family-names: "Fraternali"
+        given-names: "F."
+    journal: "Nature Methods"
+    volume: "23"
+    start: "106"
+    end: "117"
+    year: 2026
+    doi: "10.1038/s41592-025-02913-x"
+repository-code: "https://github.com/Fraternalilab/ImmunoMatch"
+license: "CC-BY-NC-4.0"

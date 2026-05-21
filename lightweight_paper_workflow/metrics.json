@@ -1,0 +1,18 @@
+{
+  "n_positive": 24,
+  "n_pseudo_negative": 24,
+  "auc_roc": 0.7100694444444444,
+  "accuracy_at_0.5": 0.6666666666666666,
+  "confusion_matrix_at_0.5": [
+    [
+      12,
+      12
+    ],
+    [
+      4,
+      20
+    ]
+  ],
+  "mean_score_positive": 0.7365280942176469,
+  "mean_score_pseudo_negative": 0.4677746881910328
+}
