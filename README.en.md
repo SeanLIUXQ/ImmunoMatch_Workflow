@@ -9,7 +9,7 @@
 
 **A lightweight, executable reproduction workflow for ImmunoMatch inference and paper-style evaluation**
 
-[中文](README.zh-CN.md) | [Original Paper](docs/original-paper.md) | [CHANGELOG](CHANGELOG.md) | [ROADMAP](ROADMAP.md) | [Quick Start](#quick-start)
+[中文](README.zh-CN.md) | [Original Paper](docs/original-paper.md) | [Optimization Report](docs/nature_style_optimization_report.md) | [CHANGELOG](CHANGELOG.md) | [ROADMAP](ROADMAP.md) | [Quick Start](#quick-start)
 
 </div>
 

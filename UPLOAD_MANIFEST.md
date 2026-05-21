@@ -8,6 +8,7 @@ This folder is the cleaned GitHub upload package.
 - `README.zh-CN.md`
 - `README.en.md`
 - `docs/original-paper.md`
+- `docs/nature_style_optimization_report.md`
 - `CITATION.cff`
 - `.gitignore`
 - `download_immunomatch_assets.py`

@@ -9,7 +9,7 @@
 
 **基于官方 ImmunoMatch 公开模型与示例数据的轻量级、可运行、可复现 workflow**
 
-[English](README.en.md) | [原论文信息](docs/original-paper.md) | [CHANGELOG](CHANGELOG.md) | [ROADMAP](ROADMAP.md) | [快速开始](#快速开始)
+[English](README.en.md) | [原论文信息](docs/original-paper.md) | [优化报告](docs/nature_style_optimization_report.md) | [CHANGELOG](CHANGELOG.md) | [ROADMAP](ROADMAP.md) | [快速开始](#快速开始)
 
 </div>
 
